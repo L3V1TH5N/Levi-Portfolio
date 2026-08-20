@@ -6,7 +6,7 @@
   --color-surface-raised: #1a1e23;
   --color-text: #e8e6e1;
   --color-text-muted: #8b9199;
-  --color-accent: #ff8a3d;
+  --color-accent: #d96b3e;
   --color-accent-dim: #8a5127;
   --color-signal: #3ddc97;
   --color-line: #23272d;
@@ -65,4 +65,21 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
+}
+
+@keyframes glow-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-glow-flow {
+  background-size: 200% 200%;
+  animation: glow-flow 4s ease infinite;
 }

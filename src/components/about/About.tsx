@@ -1,50 +1,70 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import RevealText from "@/components/motion/RevealText";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
-const FloatingShapes = dynamic(() => import("./FloatingShapes"), {
-  ssr: false,
-});
+const experience = [
+  {
+    period: "2021 — Present",
+    role: "Computer Science",
+    note: "Cavite State University",
+  },
+];
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-24 md:px-12"
-    >
-      <FloatingShapes />
+    <section id="about" className="relative px-6 py-32 md:px-16">
+      <p className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+        About Me
+      </p>
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 mx-auto max-w-2xl text-center"
+      <h2
+        className="mt-4 max-w-3xl font-black uppercase leading-[0.92] tracking-tight text-text"
+        style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)" }}
       >
-        <h2
-          className="font-display font-bold uppercase leading-[0.9] tracking-tight text-text"
-          style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)" }}
-        >
-          About Me
-        </h2>
+        <RevealText as="div">Hello, I&apos;m</RevealText>
+        <RevealText as="div" delay={0.1}>
+          <span className="text-accent">Gavriell Pangan.</span>
+        </RevealText>
+      </h2>
 
-        <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-text-muted md:text-lg">
-          I&apos;m a full stack developer focused on software that holds up
-          where it matters most — offline-first systems for places without
-          reliable internet, simulations that teach real skills, and tools
-          built to survive real-world use rather than just a demo.
+      <ScrollReveal delay={0.15}>
+        <p className="mt-8 max-w-xl text-sm leading-relaxed text-text-muted md:text-base">
+          I build software, interactive systems, and digital experiences.
+          I enjoy turning ideas into functional systems while exploring
+          the intersection between software engineering, interaction
+          design, and creative technology.
         </p>
+      </ScrollReveal>
 
-        <motion.a
-          href="#contact"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          className="mt-10 inline-block rounded-full bg-gradient-to-r from-accent to-signal px-8 py-3.5 font-mono text-sm font-medium text-bg shadow-lg shadow-accent/20"
-        >
-          Let&apos;s create something together
-        </motion.a>
-      </motion.div>
+      <div className="mt-20 grid grid-cols-1 gap-12 md:grid-cols-2">
+        <ScrollReveal delay={0.05}>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
+            Experience
+          </p>
+          <div className="mt-5 flex flex-col gap-5">
+            {experience.map((e) => (
+              <div key={e.period} className="border-b border-line pb-5">
+                <p className="font-mono text-xs text-accent">{e.period}</p>
+                <p className="mt-1 font-display text-lg font-medium text-text">
+                  {e.role}
+                </p>
+                <p className="mt-0.5 text-sm text-text-muted">{e.note}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.15}>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
+            Currently
+          </p>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-muted md:text-base">
+            Building web systems, software projects, interactive
+            experiences, and experimental applications.
+          </p>
+        </ScrollReveal>
+      </div>
     </section>
   );
 }
