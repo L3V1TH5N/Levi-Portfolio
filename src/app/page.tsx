@@ -30,13 +30,7 @@ export default function Home() {
       {/* Sections */}
       <div className="relative z-10">
         <Hero />
-        <Marquee items={["DESIGN", "SYSTEMS", "AI", "AUTOMATION", "CREATIVE TECHNOLOGY"]} />
         <About />
-        <Marquee
-          items={["JAVASCRIPT", "TYPESCRIPT", "REACT", "NEXT.JS", "NODE.JS"]}
-          direction="right"
-          duration={28}
-        />
         <Skills />
         <ActiveSystem />
         <Projects />

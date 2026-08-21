@@ -10,6 +10,7 @@ import "@fontsource/jetbrains-mono/500.css";
 import "@fontsource/anton";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import GrainOverlay from "@/components/GrainOverlay";
 
 export const metadata: Metadata = {
   title: "Levi | Full Stack Developer",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
+        <GrainOverlay />
       </body>
     </html>
   );
