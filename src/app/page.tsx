@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from '@/components/Nav';
 import Hero from '@/components/hero/Hero';
 import Marquee from '@/components/Marquee';
 import About from '@/components/about/About';
@@ -23,9 +22,6 @@ export default function Home() {
           backgroundSize: '48px 48px'
         }}
       ></div>
-
-      {/* Navigation Bar */}
-      <Nav />
 
       {/* Sections */}
       <div className="relative z-10">

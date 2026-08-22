@@ -11,6 +11,7 @@ import "@fontsource/anton";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import GrainOverlay from "@/components/GrainOverlay";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 export const metadata: Metadata = {
   title: "Levi | Full Stack Developer",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
         <GrainOverlay />
+        <ScrollIndicator />
       </body>
     </html>
   );

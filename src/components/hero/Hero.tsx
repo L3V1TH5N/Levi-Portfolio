@@ -19,11 +19,11 @@ type FloatObj = {
 };
 
 const objects: FloatObj[] = [
-  { src: "/images/objects/item-1.png", top: "-2%", left: "4%", rotate: -18, width: 460, delay: 0.5 },
-  { src: "/images/objects/item-2.png", top: "4%", right: "2%", rotate: 9, width: 540, delay: 0.65 },
-  { src: "/images/objects/item-3.png", bottom: "10%", left: "1%", rotate: -9, width: 440, delay: 0.8 },
-  { src: "/images/objects/item-4.png", bottom: "8%", right: "3%", rotate: 7, width: 480, delay: 0.95 },
-  { src: "/images/objects/item-5.png", bottom: "5%", left: "40%", rotate: -6, width: 360, delay: 1.1 },
+  { src: "/images/objects/item-1.png", top: "-8%", left: "4%", rotate: -11, width: 550, delay: 0.5 },
+  { src: "/images/objects/item-2.png", top: "-3%", right: "1%", rotate: 9, width: 650, delay: 0.65 },
+  { src: "/images/objects/item-3.png", bottom: "5%", left: "2%", rotate: -9, width: 490, delay: 0.8 },
+  { src: "/images/objects/item-4.png", bottom: "9%", right: "-1%", rotate: 7, width: 530, delay: 0.95 },
+  { src: "/images/objects/item-5.png", bottom: "5%", left: "36%", rotate: -6, width: 510, delay: 1.1 },
 ];
 
 export default function Hero() {
@@ -40,7 +40,6 @@ export default function Hero() {
   const objectsY = useTransform(scrollYProgress, [0, 1], [0, -90]);
   const objectsOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
   const uiOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const indicatorLeft = useTransform(scrollYProgress, [0, 1], ["0%", "82%"]);
 
   return (
     <section
@@ -59,7 +58,7 @@ export default function Hero() {
         }}
       />
 
-      {/* multiple sweeping motion paths, drawn once */}
+      {/* organic signal thread, drawn once, then still */}
       <motion.svg
         aria-hidden="true"
         style={{ opacity: objectsOpacity }}
@@ -68,22 +67,13 @@ export default function Hero() {
         preserveAspectRatio="none"
       >
         <motion.path
-          d="M 40 560 C 200 500, 280 380, 420 390 C 560 400, 610 280, 760 240 C 860 215, 890 160, 950 90"
-          stroke="#5a5f66"
-          strokeWidth="0.75"
+          d="M -20 548 C 104 468, 220 582, 350 506 C 418 466, 412 401, 448 338 C 501 244, 630 242, 684 330 C 739 421, 669 520, 568 518 C 468 516, 410 436, 438 350 C 483 211, 695 206, 796 326 C 874 419, 901 171, 1020 68"
+          stroke="#6b7078"
+          strokeWidth="0.8"
           fill="none"
           initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.28 }}
-          transition={{ duration: 2.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        />
-        <motion.path
-          d="M 60 120 C 220 180, 340 260, 480 320 C 600 370, 640 460, 780 500 C 850 520, 900 500, 960 470"
-          stroke="#5a5f66"
-          strokeWidth="0.6"
-          fill="none"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.2 }}
-          transition={{ duration: 2.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          animate={{ pathLength: 1, opacity: 0.3 }}
+          transition={{ duration: 2.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         />
       </motion.svg>
 
@@ -128,7 +118,7 @@ export default function Hero() {
         ))}
       </motion.div>
 
-      {/* floating objects: large, edge-cropped, static until hovered */}
+      {/* floating objects: static by default, respond only to hover */}
       {objects.map(({ src, top, left, right, bottom, rotate, width, delay }, i) => (
         <motion.div
           key={i}
@@ -156,7 +146,7 @@ export default function Hero() {
             alt=""
             width={0}
             height={0}
-            sizes="540px"
+            sizes="580px"
             style={{ width: "100%", height: "auto" }}
             className="object-contain"
           />
@@ -200,67 +190,56 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* headline: dense, tight, oversized shared "I" */}
+      {/* headline: single shared "I" bar spanning "deas" + "nto" */}
       <motion.div
         style={{ scale: contentScale, opacity: contentOpacity, y: contentY }}
         className="relative z-20 flex flex-1 flex-col items-center justify-center px-6"
       >
-        <h1
-          className="text-center text-accent"
+        <div
+          className="text-accent"
           style={{
             fontFamily: "'Anton', var(--font-display), sans-serif",
-            fontSize: "clamp(2.75rem, 7.5vw, 6.5rem)",
-            lineHeight: 0.95,
-            letterSpacing: "0",
+            fontSize: "clamp(3.2rem, 4.8vw, 7.6rem)",
           }}
         >
-          <RevealText as="div" delay={0.15}>
-            <span className="relative inline-flex items-baseline">
-              <span
-                aria-hidden="true"
-                className="inline-block bg-accent"
-                style={{
-                  width: "0.13em",
-                  height: "1.15em",
-                  marginRight: "0.03em",
-                  transform: "translateY(0.08em)",
-                }}
-              />
-              <span>deas</span>
-            </span>
-          </RevealText>
-
-          <span className="relative inline-block">
-            <RevealText as="div" delay={0.3}>
-              <span className="relative inline-flex items-baseline">
-                <span
-                  aria-hidden="true"
-                  className="inline-block bg-accent"
-                  style={{
-                    width: "0.13em",
-                    height: "1.15em",
-                    marginRight: "0.03em",
-                    transform: "translateY(0.08em)",
-                  }}
-                />
-                <span>nto</span>
-              </span>
-            </RevealText>
+          <div className="flex items-stretch" style={{ gap: "0.04em" }}>
             <motion.span
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.95 }}
-              className="absolute left-full top-1/2 ml-4 -translate-y-1/2 whitespace-nowrap px-2.5 py-1 font-mono text-[9px] font-medium uppercase tracking-wide"
-              style={{ backgroundColor: "#f2ede3", color: "#1a1a1a" }}
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: ease.out }}
+              className="inline-block origin-top bg-accent"
+              style={{ width: "0.15em" }}
+            />
+            <div
+              className="flex flex-col"
+              style={{ lineHeight: 0.92, paddingBottom: "0.1em" }}
             >
-              Gavriell C. Pangan
-            </motion.span>
-          </span>
+              <RevealText as="div" delay={0.2}>
+                deas
+              </RevealText>
+              <span className="relative">
+                <RevealText as="div" delay={0.32}>
+                  nto
+                </RevealText>
+                <motion.span
+                  initial={{ opacity: 0, y: -9 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.9 }}
+                  className="absolute left-34 top-1/2 ml-4 -translate-y-1/2 whitespace-nowrap px-2.5 py-1 font-mono text-[9px] font-medium uppercase tracking-wide"
+                  style={{ backgroundColor: "#f2ede3", color: "#1a1a1a" }}
+                >
+                  Gavriell Pangan
+                </motion.span>
+              </span>
+            </div>
+          </div>
 
-          <RevealText as="div" delay={0.45}>
-            Systems
-          </RevealText>
-        </h1>
+          <div style={{ lineHeight: 1, paddingBottom: "0.5em" }}>
+            <RevealText as="div" delay={0.42}>
+              Systems
+            </RevealText>
+          </div>
+        </div>
       </motion.div>
 
       {/* bottom-center: arrow only, tiny secondary label */}
@@ -273,8 +252,8 @@ export default function Hero() {
         className="pointer-events-auto absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1"
       >
         <motion.span
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, 3, 0] }}
+          transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
           className="text-sm text-white/70"
         >
           ↓
@@ -283,35 +262,6 @@ export default function Hero() {
           Works
         </span>
       </motion.a>
-
-      {/* bottom-right: compact scroll progress indicator, larger */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 0.7 }}
-        style={{ opacity: uiOpacity }}
-        className="pointer-events-none absolute bottom-6 right-6 z-20 hidden h-6 w-44 items-end gap-[3px] overflow-hidden rounded-sm md:flex"
-      >
-        {Array.from({ length: 32 }).map((_, i) => (
-          <span
-            key={i}
-            style={{
-              height: 4 + Math.sin(i * 0.7) * 8 + 8,
-              backgroundColor: "#4a4a4a",
-            }}
-            className="w-[2px] shrink-0"
-          />
-        ))}
-        <motion.span
-          style={{ left: indicatorLeft }}
-          className="absolute top-0 h-full w-[8px] rounded-sm"
-        >
-          <span
-            className="block h-full w-full rounded-sm"
-            style={{ backgroundColor: "var(--color-accent)" }}
-          />
-        </motion.span>
-      </motion.div>
     </section>
   );
 }

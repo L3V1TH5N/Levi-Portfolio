@@ -9,6 +9,31 @@ type MarqueeProps = {
   className?: string;
 };
 
+function Separator() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="shrink-0 text-white/60"
+      aria-hidden="true"
+    >
+      <rect
+        x="2.5"
+        y="2.5"
+        width="19"
+        height="19"
+        rx="4"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <line x1="12" y1="2.5" x2="12" y2="21.5" stroke="currentColor" strokeWidth="2" />
+      <line x1="2.5" y1="12" x2="21.5" y2="12" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+
 export default function Marquee({
   items,
   direction = "left",
@@ -29,9 +54,10 @@ export default function Marquee({
         {track.map((item, i) => (
           <span
             key={i}
-            className="font-mono text-sm font-semibold uppercase tracking-[0.2em] text-text-muted"
+            className="inline-flex items-center gap-3 font-mono text-sm font-semibold uppercase tracking-[0.2em] text-text-muted"
           >
-            {item} <span className="text-accent">•</span>
+            {item}
+            <Separator />
           </span>
         ))}
       </motion.div>

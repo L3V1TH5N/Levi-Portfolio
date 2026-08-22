@@ -37,18 +37,18 @@ const experience = [
 ];
 
 const skills = [
-  { name: "TypeScript", Icon: SiTypescript },
-  { name: "JavaScript", Icon: SiJavascript },
-  { name: "React", Icon: SiReact },
-  { name: "Next.js", Icon: SiNextdotjs },
-  { name: "Node.js", Icon: SiNodedotjs },
-  { name: "Python", Icon: SiPython },
-  { name: "Three.js", Icon: SiThreedotjs },
-  { name: "Tailwind CSS", Icon: SiTailwindcss },
-  { name: "PostgreSQL", Icon: SiPostgresql },
-  { name: "Firebase", Icon: SiFirebase },
-  { name: "Git", Icon: SiGit },
-  { name: "GitHub", Icon: SiGithub },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#F0DB4F" },
+  { name: "React", Icon: SiReact, color: "#61DAFB" },
+  { name: "Next.js", Icon: SiNextdotjs, color: "#111111" },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
+  { name: "Python", Icon: SiPython, color: "#3776AB" },
+  { name: "Three.js", Icon: SiThreedotjs, color: "#111111" },
+  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#38BDF8" },
+  { name: "PostgreSQL", Icon: SiPostgresql, color: "#336791" },
+  { name: "Firebase", Icon: SiFirebase, color: "#FFCA28" },
+  { name: "Git", Icon: SiGit, color: "#F05032" },
+  { name: "GitHub", Icon: SiGithub, color: "#181717" },
 ];
 
 const polaroids = [
@@ -245,32 +245,34 @@ export default function About() {
             }}
             className="
               absolute
-              bottom-[15%]
-              right-[-3%]
+              bottom-[14%]
+              right-[10%]
               z-30
-              max-w-[225px]
-              px-2
-              py-1
+              max-w-[240px]
+              border
+              px-3
+              py-2.5
             "
+            style={{
+              borderColor: "rgba(49,95,196,0.35)",
+              backgroundColor: "rgba(255,255,255,0.4)",
+              boxShadow: "3px 4px 0px rgba(49,95,196,0.08)",
+            }}
           >
             <p
-              className="text-[11px] leading-[1.25]"
+              className="text-[12.5px] leading-[1.6]"
               style={{
-                fontFamily:
-                  "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                color: "#171717",
+                fontFamily: "'Helvetica Neue', Arial, sans-serif",
+                color: "#1f1f1f",
+                textDecorationLine: "underline",
+                textDecorationColor: "#315fc4",
+                textUnderlineOffset: "3px",
+                textDecorationThickness: "1px",
               }}
             >
               Remember, every model is a human opinion embedded in
               mathematics.
             </p>
-
-            <div
-              className="mt-1 h-[2px] w-[92%]"
-              style={{
-                backgroundColor: "#315fc4",
-              }}
-            />
           </motion.div>
         </div>
 
@@ -350,13 +352,12 @@ export default function About() {
               z-20
               mt-3
               whitespace-nowrap
-              tracking-tight
             "
             style={{
               fontFamily:
-                "'Arial', 'Helvetica Neue', sans-serif",
+                "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
               fontSize: "clamp(2.4rem, 4.25vw, 4.6rem)",
-              fontWeight: 800,
+              fontWeight: 700,
               lineHeight: 0.92,
             }}
           >
@@ -364,11 +365,6 @@ export default function About() {
             <span
               style={{
                 color: "#315fc4",
-                fontFamily:
-                  "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                fontStyle: "italic",
-                fontWeight: 600,
-                letterSpacing: "-0.045em",
               }}
             >
               Gavriell Pangan.
@@ -504,6 +500,7 @@ export default function About() {
                         style={{
                           color: "#315fc4",
                           fontFamily: "monospace",
+                          fontStyle: "italic",
                         }}
                       >
                         {e.period}
@@ -564,22 +561,26 @@ export default function About() {
                   Skills
                 </h3>
 
-                <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
-                  {skills.map(({ name, Icon }) => (
+                <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
+                  {skills.map(({ name, Icon, color }) => (
                     <span
                       key={name}
-                      className="flex items-center gap-1.5 text-[9px]"
+                      className="flex items-center gap-2 text-[13px]"
                       style={{
-                        color: "#403d39",
-                        fontFamily: "monospace",
+                        color: "#2c2a26",
+                        fontFamily:
+                          "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
                       }}
                     >
-                      <Icon
-                        size={12}
+                      <span
+                        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md"
                         style={{
-                          color: "#77736d",
+                          backgroundColor: "rgba(255,255,255,0.65)",
+                          boxShadow: "0 1px 3px rgba(0,0,0,.1)",
                         }}
-                      />
+                      >
+                        <Icon size={14} style={{ color }} />
+                      </span>
                       {name}
                     </span>
                   ))}
@@ -597,9 +598,9 @@ export default function About() {
                 flex
                 items-end
                 justify-start
-                gap-3
-                sm:gap-4
-                lg:gap-5
+                gap-4
+                sm:gap-5
+                lg:gap-6
               "
             >
               {polaroids.map((p, i) => (
@@ -608,12 +609,10 @@ export default function About() {
                   initial={{
                     opacity: 0,
                     y: 20,
-                    rotate: 0,
                   }}
                   whileInView={{
                     opacity: 1,
                     y: 0,
-                    rotate: p.rotate,
                   }}
                   whileHover={{
                     y: -6,
@@ -628,27 +627,30 @@ export default function About() {
                     delay: i * 0.1,
                     ease: ease.out,
                   }}
+                  style={{
+                    rotate: p.rotate,
+                  }}
                   className="
                     relative
-                    w-[150px]
+                    w-[175px]
                     shrink-0
                     bg-[#f8f6f0]
-                    p-2
-                    pb-5
+                    p-2.5
+                    pb-6
                     shadow-[0_5px_12px_rgba(0,0,0,.12)]
-                    sm:w-[165px]
-                    lg:w-[190px]
-                    xl:w-[205px]
+                    sm:w-[195px]
+                    lg:w-[225px]
+                    xl:w-[245px]
                   "
                 >
                   {/* TAPE */}
                   <span
                     className="
                       absolute
-                      -top-2
+                      -top-2.5
                       left-1/2
-                      h-4
-                      w-11
+                      h-5
+                      w-12
                       -translate-x-1/2
                     "
                     style={{
@@ -669,7 +671,7 @@ export default function About() {
 
                   {/* CAPTION */}
                   <p
-                    className="mt-2 text-center text-[9px]"
+                    className="mt-2.5 text-center text-[10px]"
                     style={{
                       color: "#4f4a45",
                       fontFamily:
