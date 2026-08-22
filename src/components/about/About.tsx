@@ -356,7 +356,7 @@ export default function About() {
             style={{
               fontFamily:
                 "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-              fontSize: "clamp(2.4rem, 4.25vw, 4.6rem)",
+              fontSize: "clamp(2.6rem, 4.9vw, 6rem)",
               fontWeight: 700,
               lineHeight: 0.92,
             }}
@@ -376,12 +376,12 @@ export default function About() {
           ===================================================== */}
           <div
             className="
-              mt-5
+              mt-10
               grid
               grid-cols-1
-              gap-7
-              md:grid-cols-[1.02fr_1fr]
-              lg:grid-cols-[1.04fr_1fr]
+              gap-12
+              md:grid-cols-[1fr_1.75fr]
+              lg:grid-cols-[1fr_1.85fr]
             "
           >
             {/* ===================================================
@@ -405,10 +405,10 @@ export default function About() {
                   delay: 0.15,
                 }}
                 className="
-                  max-w-[310px]
-                  text-[14px]
-                  leading-[1.47]
-                  lg:text-[15px]
+                  max-w-[380px]
+                  text-[19px]
+                  leading-[1.5]
+                  lg:text-[22px]
                 "
                 style={{
                   color: "#55514c",
@@ -440,11 +440,11 @@ export default function About() {
                   delay: 0.22,
                 }}
                 className="
-                  mt-5
-                  max-w-[310px]
-                  text-[14px]
-                  leading-[1.47]
-                  lg:text-[15px]
+                  mt-8
+                  max-w-[380px]
+                  text-[19px]
+                  leading-[1.5]
+                  lg:text-[22px]
                 "
                 style={{
                   color: "#55514c",
@@ -460,7 +460,7 @@ export default function About() {
             {/* ===================================================
                 EXPERIENCE + SKILLS
             =================================================== */}
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-2 gap-10">
               {/* EXPERIENCE */}
               <motion.div
                 initial={{
@@ -480,7 +480,7 @@ export default function About() {
                 }}
               >
                 <h3
-                  className="text-[22px] font-bold"
+                  className="text-[34px] leading-[1.05] sm:text-[42px] lg:text-[52px] font-bold"
                   style={{
                     fontFamily:
                       "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
@@ -489,14 +489,14 @@ export default function About() {
                   Experience
                 </h3>
 
-                <div className="mt-4 flex flex-col gap-4">
+                <div className="mt-6 flex flex-col gap-7">
                   {experience.map((e) => (
                     <div
                       key={e.period}
-                      className="grid grid-cols-[48px_1fr] gap-2"
+                      className="grid grid-cols-[64px_1fr] gap-3"
                     >
                       <span
-                        className="text-[10px] font-semibold"
+                        className="text-[18px] sm:text-[20px] font-semibold"
                         style={{
                           color: "#315fc4",
                           fontFamily: "monospace",
@@ -508,7 +508,7 @@ export default function About() {
 
                       <div>
                         <p
-                          className="text-[13px] font-semibold leading-tight"
+                          className="text-[26px] sm:text-[32px] lg:text-[38px] font-semibold leading-[1.05]"
                           style={{
                             fontFamily:
                               "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
@@ -518,7 +518,7 @@ export default function About() {
                         </p>
 
                         <p
-                          className="mt-1 text-[9px] leading-[1.25]"
+                          className="mt-1.5 text-[16px] sm:text-[18px] leading-[1.3]"
                           style={{
                             color: "#77716a",
                             fontFamily:
@@ -552,7 +552,7 @@ export default function About() {
                 }}
               >
                 <h3
-                  className="text-[22px] font-bold"
+                  className="text-[34px] leading-[1.05] sm:text-[42px] lg:text-[52px] font-bold"
                   style={{
                     fontFamily:
                       "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
@@ -561,11 +561,11 @@ export default function About() {
                   Skills
                 </h3>
 
-                <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
+                <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3">
                   {skills.map(({ name, Icon, color }) => (
                     <span
                       key={name}
-                      className="flex items-center gap-2 text-[13px]"
+                      className="flex items-center gap-2 text-[15px] sm:text-[17px]"
                       style={{
                         color: "#2c2a26",
                         fontFamily:
@@ -573,13 +573,13 @@ export default function About() {
                       }}
                     >
                       <span
-                        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md"
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
                         style={{
                           backgroundColor: "rgba(255,255,255,0.65)",
                           boxShadow: "0 1px 3px rgba(0,0,0,.1)",
                         }}
                       >
-                        <Icon size={14} style={{ color }} />
+                        <Icon size={15} style={{ color }} />
                       </span>
                       {name}
                     </span>
@@ -598,9 +598,10 @@ export default function About() {
                 flex
                 items-end
                 justify-start
-                gap-4
-                sm:gap-5
-                lg:gap-6
+                gap-6
+                sm:gap-8
+                lg:gap-10
+                xl:gap-11
               "
             >
               {polaroids.map((p, i) => (
@@ -616,8 +617,7 @@ export default function About() {
                   }}
                   whileHover={{
                     y: -6,
-                    rotate: 0,
-                    scale: 1.025,
+                    scale: 1.02,
                   }}
                   viewport={{
                     once: true,
@@ -627,30 +627,27 @@ export default function About() {
                     delay: i * 0.1,
                     ease: ease.out,
                   }}
-                  style={{
-                    rotate: p.rotate,
-                  }}
                   className="
                     relative
-                    w-[175px]
+                    w-[230px]
                     shrink-0
                     bg-[#f8f6f0]
-                    p-2.5
+                    p-3.5
                     pb-6
                     shadow-[0_5px_12px_rgba(0,0,0,.12)]
-                    sm:w-[195px]
-                    lg:w-[225px]
-                    xl:w-[245px]
+                    sm:w-[275px]
+                    lg:w-[310px]
+                    xl:w-[335px]
                   "
                 >
                   {/* TAPE */}
                   <span
                     className="
                       absolute
-                      -top-2.5
+                      -top-3
                       left-1/2
-                      h-5
-                      w-12
+                      h-6
+                      w-16
                       -translate-x-1/2
                     "
                     style={{
@@ -671,7 +668,7 @@ export default function About() {
 
                   {/* CAPTION */}
                   <p
-                    className="mt-2.5 text-center text-[10px]"
+                    className="mt-3 text-center text-[15px] sm:text-[16px]"
                     style={{
                       color: "#4f4a45",
                       fontFamily:

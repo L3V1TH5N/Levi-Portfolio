@@ -6,6 +6,7 @@ import Skills from '@/components/skills/Skills';
 import Projects from '@/components/projects/Projects';
 import Contact from '@/components/contact/Contact';
 import ActiveSystem from "@/components/activesystem/ActiveSystem";
+import Statement from "@/components/statement/Statement";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <Hero />
         <About />
         <Skills />
+        <Statement />
         <ActiveSystem />
         <Projects />
         <Contact />

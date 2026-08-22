@@ -252,7 +252,7 @@ export default function Skills() {
                 backgroundColor: dot.color,
               }}
             />
-          ))}
+          ))} 
         </div>
 
         {orbitNodes.map((node, i) => (
