@@ -58,8 +58,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
+  background: #315fc4;
+  color: #ffffff;
 }
 
 :focus-visible {

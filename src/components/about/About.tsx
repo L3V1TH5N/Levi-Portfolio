@@ -4,50 +4,98 @@ import { motion } from "framer-motion";
 import Marquee from "@/components/Marquee";
 import { ease } from "@/lib/motion";
 import {
-  SiTypescript,
-  SiJavascript,
+  SiMysql,
+  SiHtml5,
+  SiCss,
   SiReact,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiPython,
-  SiThreedotjs,
-  SiTailwindcss,
-  SiPostgresql,
+  SiExpress,
   SiFirebase,
+  SiMongodb,
+  SiOpenjdk,
+  SiJavascript,
+  SiTailwindcss,
+  SiTypescript,
+  SiNodedotjs,
+  SiPhp,
   SiGit,
   SiGithub,
+  SiThreedotjs,
+  SiGodotengine,
+  SiBlender,
 } from "react-icons/si";
+
+/* =====================================================================
+   FONT
+   ONE font family is used for this entire section — the "Hello, I'm"
+   headline, the intro paragraph, the Experience/Skills headers and rows,
+   and the polaroid captions. It's a casual, rounded HANDWRITTEN font
+   (not a geometric sans like Poppins — compare the paragraph text and
+   "Experience"/"Skills" headers to the headline: same family, just
+   lighter weight and smaller size for body copy, bold + huge for the
+   headline).
+
+   Kalam is the closest easy-to-install match — it has the right
+   moderate, legible handwriting character at both small body sizes and
+   large bold headline sizes. Caveat/Shantell Sans are close backups if
+   Kalam doesn't read casual/bold enough once installed.
+     npm install @fontsource/kalam
+   and add to layout.tsx (replacing the Poppins imports, which aren't
+   used anywhere else in this project):
+     import "@fontsource/kalam/400.css";
+     import "@fontsource/kalam/700.css";
+===================================================================== */
+const DISPLAY_FONT = "'Kalam', 'Caveat', cursive";
 
 const experience = [
   {
-    period: "2021—25",
-    role: "Computer Science",
-    note: "Cavite State University",
+    period: "2025",
+    role: "Full Stack Dev (Intern)",
+    note: "Municipal Treasurer's Office, Ternate — built their expense management system",
   },
   {
-    period: "2024",
-    role: "Freelance Developer",
-    note: "Independent full stack work",
+    period: "2025",
+    role: "Full Stack Dev (OJT)",
+    note: "ODCI — document management system with role-based access",
+  },
+  {
+    period: "2025–26",
+    role: "Full Stack Developer",
+    note: "CvSUHimay — 3D fish deboning simulator for CvSU's Fisheries program, built with React Three Fiber",
   },
   {
     period: "Now",
-    role: "Building",
-    note: "Systems, simulations, and practical tools",
+    role: "Freelancing",
+    note: "Full stack + AI work, including GetUp (AI-verified alarm app)",
   },
 ];
 
-const skills = [
+// Two explicit columns so the order matches the reference layout exactly —
+// left column top-to-bottom, then right column top-to-bottom. Sourced
+// directly from the resume's Technical Skills section (dropped a few
+// items — Dart, Flutter/Expo, scikit-learn/TensorFlow, Unity, Postman,
+// VS Code, Bootstrap — to keep the grid at a readable 18 entries; swap
+// any of these back in if you'd rather feature them over what's here).
+const skillsLeft = [
+  { name: "HTML", Icon: SiHtml5, color: "#E34F26" },
+  { name: "CSS3", Icon: SiCss, color: "#1572B6" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#d4b106" },
   { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
-  { name: "JavaScript", Icon: SiJavascript, color: "#F0DB4F" },
-  { name: "React", Icon: SiReact, color: "#61DAFB" },
-  { name: "Next.js", Icon: SiNextdotjs, color: "#111111" },
+  { name: "PHP", Icon: SiPhp, color: "#777BB4" },
+  { name: "React / RN", Icon: SiReact, color: "#61DAFB" },
   { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
-  { name: "Python", Icon: SiPython, color: "#3776AB" },
-  { name: "Three.js", Icon: SiThreedotjs, color: "#111111" },
-  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#38BDF8" },
-  { name: "PostgreSQL", Icon: SiPostgresql, color: "#336791" },
-  { name: "Firebase", Icon: SiFirebase, color: "#FFCA28" },
+  { name: "Express.js", Icon: SiExpress, color: "#6b6b6b" },
   { name: "Git", Icon: SiGit, color: "#F05032" },
+];
+
+const skillsRight = [
+  { name: "Java", Icon: SiOpenjdk, color: "#437291" },
+  { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
+  { name: "Firebase", Icon: SiFirebase, color: "#FFCA28" },
+  { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
+  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#38BDF8" },
+  { name: "Three.js", Icon: SiThreedotjs, color: "#1a1a1a" },
+  { name: "Godot Engine", Icon: SiGodotengine, color: "#478CBF" },
+  { name: "Blender", Icon: SiBlender, color: "#E87D0D" },
   { name: "GitHub", Icon: SiGithub, color: "#181717" },
 ];
 
@@ -69,64 +117,88 @@ const polaroids = [
   },
 ];
 
+function SkillRow({
+  name,
+  Icon,
+  color,
+  abbr,
+}: {
+  name: string;
+  Icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }> | null;
+  color: string;
+  abbr?: string;
+}) {
+  return (
+    <span
+      className="flex items-center gap-2 text-[14px]"
+      style={{ color: "#2c2a26", fontFamily: DISPLAY_FONT, fontWeight: 500 }}
+    >
+      <span
+        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.65)",
+          boxShadow: "0 1px 3px rgba(0,0,0,.1)",
+        }}
+      >
+        {Icon ? (
+          <Icon size={13} style={{ color }} />
+        ) : (
+          <span className="font-mono text-[9px] font-bold" style={{ color }}>
+            {abbr}
+          </span>
+        )}
+      </span>
+      {name}
+    </span>
+  );
+}
+
 export default function About() {
   return (
     <section
       id="about"
       className="relative overflow-hidden"
-      style={{
-        backgroundColor: "#e8e2d4",
-        color: "#171717",
-      }}
+      style={{ backgroundColor: "#e8e2d4", color: "#171717" }}
     >
       {/* =========================================================
-          PAPER GRID
+          PAPER GRID — slightly larger/lighter cells + a soft
+          vignette so the paper reads as scanned rather than flat.
       ========================================================= */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          opacity: 0.34,
+          opacity: 0.3,
           backgroundImage: `
-            linear-gradient(
-              to right,
-              rgba(30, 30, 30, 0.12) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              to bottom,
-              rgba(30, 30, 30, 0.12) 1px,
-              transparent 1px
-            )
+            linear-gradient(to right, rgba(30,30,30,0.11) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(30,30,30,0.11) 1px, transparent 1px)
           `,
-          backgroundSize: "28px 28px",
+          backgroundSize: "32px 32px",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 45%, rgba(30,28,22,0.06) 100%)",
         }}
       />
 
       {/* =========================================================
-          PAPER GRAIN / NOISE
+          PAPER GRAIN / NOISE — z-1, isolated from the content grid
+          below (which forms its own stacking context via `isolate`),
+          so it can never blend on top of the photos.
       ========================================================= */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.16] mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.14] mix-blend-multiply"
         style={{
           backgroundImage: `
             url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.42'/%3E%3C/svg%3E")
           `,
           backgroundRepeat: "repeat",
           backgroundSize: "180px 180px",
-        }}
-      />
-
-      {/* =========================================================
-          VERY SUBTLE PAPER LIGHT / DARK VARIATION
-      ========================================================= */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[2]"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 35%, rgba(255,255,255,.22), transparent 55%), radial-gradient(circle at 15% 80%, rgba(0,0,0,.035), transparent 35%)",
         }}
       />
 
@@ -138,22 +210,24 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0, rotate: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="absolute right-6 top-5 z-30 hidden border px-3 py-1.5 md:block"
+        className="absolute right-8 top-6 z-30 hidden border px-3.5 py-2 md:block"
         style={{
           borderColor: "rgba(20,20,20,.22)",
           backgroundColor: "rgba(239,235,225,.75)",
           boxShadow: "0 1px 2px rgba(0,0,0,.04)",
           fontFamily: "monospace",
-          fontSize: "9px",
+          fontSize: "14px",
           letterSpacing: "0.06em",
-          transform: "rotate(1deg)",
+          transform: "rotate(-2deg)",
         }}
       >
         EVERY FRAME IS ART.
       </motion.div>
 
       {/* =========================================================
-          MAIN POSTER
+          MAIN POSTER — `isolate` gives this its own stacking
+          context so the grain/vignette layers above can never
+          paint over anything inside it (photos included).
       ========================================================= */}
       <div
         className="
@@ -164,6 +238,7 @@ export default function About() {
           grid-cols-1
           md:grid-cols-[40%_60%]
         "
+        style={{ isolation: "isolate" }}
       >
         {/* =======================================================
             LEFT SIDE — ARTWORK
@@ -173,86 +248,42 @@ export default function About() {
             src="/images/about-illustration.png"
             alt=""
             aria-hidden="true"
-            initial={{
-              opacity: 0,
-              x: -30,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.2,
-            }}
-            transition={{
-              duration: 0.9,
-              ease: ease.out,
-            }}
+            data-no-grain
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.9, ease: ease.out }}
             className="
               absolute
-              bottom-0
-              left-[-7%]
+              inset-0
+              left-[-5%]
               z-10
-              h-[99%]
-              w-[120%]
+              h-full
+              w-[112%]
               max-w-none
-              object-contain
-              object-bottom
+              object-cover
+              object-top
             "
+            style={{ filter: "none", mixBlendMode: "normal" }}
           />
 
           {/* Blue offset/shadow accent behind artwork */}
           <div
             aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              bottom-[7%]
-              left-[7%]
-              z-[5]
-              h-[78%]
-              w-[78%]
-              opacity-20
-              blur-3xl
-            "
+            className="pointer-events-none absolute bottom-[7%] left-[7%] z-[5] h-[78%] w-[78%] opacity-20 blur-3xl"
             style={{
               background:
                 "radial-gradient(circle, #315fc4 0%, transparent 68%)",
             }}
           />
 
-          {/* =====================================================
-              ARTWORK QUOTE
-          ===================================================== */}
+          {/* ARTWORK QUOTE */}
           <motion.div
-            initial={{
-              opacity: 0,
-              x: 10,
-              rotate: -3,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-              rotate: -3,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.7,
-              delay: 0.35,
-            }}
-            className="
-              absolute
-              bottom-[14%]
-              right-[10%]
-              z-30
-              max-w-[240px]
-              border
-              px-3
-              py-2.5
-            "
+            initial={{ opacity: 0, x: 10, rotate: -3 }}
+            whileInView={{ opacity: 1, x: 0, rotate: -3 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="absolute bottom-[14%] right-[10%] z-30 max-w-[240px] border px-3 py-2.5"
             style={{
               borderColor: "rgba(49,95,196,0.35)",
               backgroundColor: "rgba(255,255,255,0.4)",
@@ -262,7 +293,8 @@ export default function About() {
             <p
               className="text-[12.5px] leading-[1.6]"
               style={{
-                fontFamily: "'Helvetica Neue', Arial, sans-serif",
+                fontFamily: DISPLAY_FONT,
+                fontWeight: 500,
                 color: "#1f1f1f",
                 textDecorationLine: "underline",
                 textDecorationColor: "#315fc4",
@@ -294,31 +326,19 @@ export default function About() {
             xl:px-12
           "
         >
-          {/* =====================================================
-              ABOUT ME LABEL
-          ===================================================== */}
+          {/* ABOUT ME LABEL */}
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 8,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.5,
-            }}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
             <span
-              className="inline-block px-2.5 py-1 text-white"
+              className="inline-block px-3 py-1.5 text-white"
               style={{
                 backgroundColor: "#315fc4",
                 fontFamily: "monospace",
-                fontSize: "10px",
+                fontSize: "13px",
                 fontWeight: 700,
                 letterSpacing: "0.05em",
               }}
@@ -327,306 +347,145 @@ export default function About() {
             </span>
           </motion.div>
 
-          {/* =====================================================
-              HERO TITLE
-          ===================================================== */}
+          {/* HERO TITLE — same handwritten font as the rest of the section,
+              just bold and much larger */}
           <motion.h2
-            initial={{
-              opacity: 0,
-              y: 15,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.75,
-              delay: 0.08,
-              ease: ease.out,
-            }}
-            className="
-              relative
-              z-20
-              mt-3
-              whitespace-nowrap
-            "
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75, delay: 0.08, ease: ease.out }}
+            className="relative z-20 mt-3 whitespace-nowrap"
             style={{
-              fontFamily:
-                "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-              fontSize: "clamp(2.6rem, 4.9vw, 6rem)",
+              fontFamily: DISPLAY_FONT,
+              fontSize: "clamp(2.1rem, 3.6vw, 3.8rem)",
               fontWeight: 700,
-              lineHeight: 0.92,
+              lineHeight: 1.05,
             }}
           >
             Hello! I&apos;m{" "}
-            <span
-              style={{
-                color: "#315fc4",
-              }}
-            >
-              Gavriell Pangan.
-            </span>
+            <span style={{ color: "#315fc4" }}>Gavriell Pangan.</span>
           </motion.h2>
 
-          {/* =====================================================
-              CONTENT AREA
-          ===================================================== */}
+          {/* CONTENT AREA */}
           <div
             className="
-              mt-10
+              mt-8
               grid
               grid-cols-1
-              gap-12
-              md:grid-cols-[1fr_1.75fr]
-              lg:grid-cols-[1fr_1.85fr]
+              gap-10
+              md:grid-cols-[0.95fr_0.75fr_0.95fr]
+              lg:gap-12
             "
           >
-            {/* ===================================================
-                INTRODUCTION
-            =================================================== */}
-            <div>
-              <motion.p
-                initial={{
-                  opacity: 0,
-                  y: 12,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.15,
-                }}
-                className="
-                  max-w-[380px]
-                  text-[19px]
-                  leading-[1.5]
-                  lg:text-[22px]
-                "
-                style={{
-                  color: "#55514c",
-                  fontFamily:
-                    "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                }}
+            {/* INTRODUCTION — same font, regular weight */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="max-w-[340px] text-[22px] leading-[1.55]"
+              style={{ color: "#55514c", fontFamily: DISPLAY_FONT, fontWeight: 400 }}
+            >
+              Whether it is a serious project or a late-night experiment, I
+              am usually designing, testing, or building. I enjoy turning
+              complex systems into experiences that feel clear, expressive
+              and human. I care about fast, accessible interfaces, reliable
+              data tools and thoughtful micro-interactions. I follow unusual
+              ideas until they become useful, real things.
+            </motion.p>
+
+            {/* EXPERIENCE */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <h3
+                className="text-[26px] leading-[1.1] sm:text-[28px]"
+                style={{ fontFamily: DISPLAY_FONT, fontWeight: 700, color: "#171717" }}
               >
-                Whether it&apos;s a serious project or a late-night
-                experiment, I&apos;m usually designing, testing, or building
-                something. I enjoy turning ideas into functional systems
-                while exploring the intersection of software engineering,
-                interaction design, and creative technology.
-              </motion.p>
+                Experience
+              </h3>
 
-              <motion.p
-                initial={{
-                  opacity: 0,
-                  y: 12,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.22,
-                }}
-                className="
-                  mt-8
-                  max-w-[380px]
-                  text-[19px]
-                  leading-[1.5]
-                  lg:text-[22px]
-                "
-                style={{
-                  color: "#55514c",
-                  fontFamily:
-                    "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                }}
-              >
-                I care about offline-first reliability, clear interfaces,
-                and tools that hold up under real use — not just in a demo.
-              </motion.p>
-            </div>
-
-            {/* ===================================================
-                EXPERIENCE + SKILLS
-            =================================================== */}
-            <div className="grid grid-cols-2 gap-10">
-              {/* EXPERIENCE */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 12,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.2,
-                }}
-              >
-                <h3
-                  className="text-[34px] leading-[1.05] sm:text-[42px] lg:text-[52px] font-bold"
-                  style={{
-                    fontFamily:
-                      "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                  }}
-                >
-                  Experience
-                </h3>
-
-                <div className="mt-6 flex flex-col gap-7">
-                  {experience.map((e) => (
-                    <div
-                      key={e.period}
-                      className="grid grid-cols-[64px_1fr] gap-3"
-                    >
-                      <span
-                        className="text-[18px] sm:text-[20px] font-semibold"
-                        style={{
-                          color: "#315fc4",
-                          fontFamily: "monospace",
-                          fontStyle: "italic",
-                        }}
-                      >
-                        {e.period}
-                      </span>
-
-                      <div>
-                        <p
-                          className="text-[26px] sm:text-[32px] lg:text-[38px] font-semibold leading-[1.05]"
-                          style={{
-                            fontFamily:
-                              "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                          }}
-                        >
-                          {e.role}
-                        </p>
-
-                        <p
-                          className="mt-1.5 text-[16px] sm:text-[18px] leading-[1.3]"
-                          style={{
-                            color: "#77716a",
-                            fontFamily:
-                              "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                          }}
-                        >
-                          {e.note}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* SKILLS */}
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 12,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.26,
-                }}
-              >
-                <h3
-                  className="text-[34px] leading-[1.05] sm:text-[42px] lg:text-[52px] font-bold"
-                  style={{
-                    fontFamily:
-                      "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                  }}
-                >
-                  Skills
-                </h3>
-
-                <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3">
-                  {skills.map(({ name, Icon, color }) => (
+              <div className="mt-5 flex flex-col gap-5">
+                {experience.map((e) => (
+                  <div key={e.period} className="grid grid-cols-[46px_1fr] gap-2">
                     <span
-                      key={name}
-                      className="flex items-center gap-2 text-[15px] sm:text-[17px]"
+                      className="text-[12px] sm:text-[13px]"
                       style={{
-                        color: "#2c2a26",
-                        fontFamily:
-                          "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
+                        color: "#315fc4",
+                        fontFamily: "monospace",
+                        fontWeight: 600,
+                        fontStyle: "italic",
                       }}
                     >
-                      <span
-                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
-                        style={{
-                          backgroundColor: "rgba(255,255,255,0.65)",
-                          boxShadow: "0 1px 3px rgba(0,0,0,.1)",
-                        }}
-                      >
-                        <Icon size={15} style={{ color }} />
-                      </span>
-                      {name}
+                      {e.period}
                     </span>
+
+                    <div>
+                      <p
+                        className="text-[15px] leading-[1.2] sm:text-[16px]"
+                        style={{ fontFamily: DISPLAY_FONT, fontWeight: 600, color: "#171717" }}
+                      >
+                        {e.role}
+                      </p>
+                      <p
+                        className="mt-1 text-[12.5px] leading-[1.35] sm:text-[13px]"
+                        style={{ color: "#77716a", fontFamily: DISPLAY_FONT, fontWeight: 400 }}
+                      >
+                        {e.note}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* SKILLS */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.26 }}
+            >
+              <h3
+                className="text-[26px] leading-[1.1] sm:text-[28px]"
+                style={{ fontFamily: DISPLAY_FONT, fontWeight: 700, color: "#171717" }}
+              >
+                Skills
+              </h3>
+
+              <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5">
+                <div className="flex flex-col gap-2.5">
+                  {skillsLeft.map((s) => (
+                    <SkillRow key={s.name} {...s} />
                   ))}
                 </div>
-              </motion.div>
-            </div>
+                <div className="flex flex-col gap-2.5">
+                  {skillsRight.map((s) => (
+                    <SkillRow key={s.name} {...s} />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
 
           {/* =====================================================
-              POLAROIDS
+              POLAROIDS — isolate + explicit no-filter/no-blend so
+              nothing from the paper/grain layers can wash them out.
           ===================================================== */}
           <div className="mt-auto pt-8">
-            <div
-              className="
-                flex
-                items-end
-                justify-start
-                gap-6
-                sm:gap-8
-                lg:gap-10
-                xl:gap-11
-              "
-            >
+            <div className="flex items-end justify-start gap-6 sm:gap-8 lg:gap-10 xl:gap-11">
               {polaroids.map((p, i) => (
                 <motion.div
                   key={i}
-                  initial={{
-                    opacity: 0,
-                    y: 20,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  whileHover={{
-                    y: -6,
-                    scale: 1.02,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    duration: 0.65,
-                    delay: i * 0.1,
-                    ease: ease.out,
-                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -6, rotate: 0, scale: 1.02 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.65, delay: i * 0.1, ease: ease.out }}
+                  style={{ rotate: p.rotate, isolation: "isolate" }}
                   className="
                     relative
                     w-[230px]
@@ -642,14 +501,7 @@ export default function About() {
                 >
                   {/* TAPE */}
                   <span
-                    className="
-                      absolute
-                      -top-3
-                      left-1/2
-                      h-6
-                      w-16
-                      -translate-x-1/2
-                    "
+                    className="absolute -top-3 left-1/2 h-6 w-16 -translate-x-1/2"
                     style={{
                       backgroundColor: "#e4d5b9",
                       opacity: 0.82,
@@ -657,23 +509,26 @@ export default function About() {
                     }}
                   />
 
-                  {/* IMAGE */}
-                  <div className="aspect-[4/3] overflow-hidden">
+                  {/* IMAGE — data-no-grain excludes it from the global
+                      GrainOverlay; no filter/blend-mode is applied here
+                      so colors stay true to the source photo. */}
+                  <div
+                    className="aspect-[4/3] overflow-hidden bg-white"
+                    style={{ isolation: "isolate" }}
+                  >
                     <img
                       src={p.image}
                       alt={p.caption}
+                      data-no-grain
                       className="h-full w-full object-cover"
+                      style={{ filter: "none", mixBlendMode: "normal" }}
                     />
                   </div>
 
                   {/* CAPTION */}
                   <p
-                    className="mt-3 text-center text-[15px] sm:text-[16px]"
-                    style={{
-                      color: "#4f4a45",
-                      fontFamily:
-                        "'Comic Sans MS', 'Segoe Print', 'Bradley Hand', cursive",
-                    }}
+                    className="mt-3 text-center text-[14.5px] sm:text-[15px]"
+                    style={{ color: "#4f4a45", fontFamily: DISPLAY_FONT, fontWeight: 500 }}
                   >
                     {p.caption}
                   </p>
@@ -687,17 +542,7 @@ export default function About() {
       {/* =========================================================
           BOTTOM MARQUEE
       ========================================================= */}
-      <div
-        className="
-          relative
-          z-40
-          overflow-hidden
-          border-t
-          border-white/10
-          bg-[#111111]
-          py-3
-        "
-      >
+      <div className="relative z-40 overflow-hidden border-t border-white/10 bg-[#111111] py-3">
         <Marquee
           items={[
             "DESIGN",
